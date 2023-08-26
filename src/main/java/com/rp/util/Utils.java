@@ -1,0 +1,38 @@
+package com.rp.util;
+
+import com.github.javafaker.Faker;
+import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
+import java.util.function.Consumer;
+
+@UtilityClass
+public class Utils {
+
+    public final Faker FAKER = Faker.instance();
+
+    public Consumer<Object> onNext() {
+        return o -> System.out.println("Received: " + o);
+    }
+
+    public Consumer<Throwable> onError() {
+        return e -> System.err.println("ERROR: " + e.getMessage());
+    }
+
+    public Runnable onComplete() {
+        return () -> System.out.println("Completed");
+    }
+
+    public Faker faker() {
+        return FAKER;
+    }
+
+    public void sleepSeconds(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
