@@ -3,6 +3,7 @@ package com.rp.util;
 import com.github.javafaker.Faker;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.reactivestreams.Subscriber;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -34,5 +35,13 @@ public class Utils {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Subscriber<Object> subscriber() {
+        return new DefaultSubscriber();
+    }
+
+    public static Subscriber<Object> subscriber(String name) {
+        return new DefaultSubscriber(name);
     }
 }
